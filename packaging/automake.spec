@@ -13,6 +13,7 @@ Source2:    filter-requires-automake.sh
 Source3:    automake.man
 Source4:    aclocal.man
 Source5:    automake-rpmlintrc
+Source1001: packaging/automake.manifest 
 URL:        http://sources.redhat.com/automake
 Requires:   autoconf >= 2.62
 Buildrequires:  autoconf >= 2.62
@@ -38,6 +39,7 @@ chmod +x %{SOURCE1}
 chmod +x %{SOURCE2}
 
 %build
+cp %{SOURCE1001} .
 ./configure --prefix=%{_prefix} --mandir=%{_mandir} --infodir=%{_infodir} \
    --bindir=%{_bindir} --datadir=%{_datadir} --libdir=%{_libdir} \
    --docdir=%{_docdir}/%{name}-%{version}
@@ -63,6 +65,7 @@ rm -rf $RPM_BUILD_ROOT%{_infodir}
 %clean
 rm -rf ${RPM_BUILD_ROOT}
 %files
+%manifest automake.manifest
 %defattr(-,root,root,-)
 %doc AUTHORS README THANKS NEWS
 %{_bindir}/*
